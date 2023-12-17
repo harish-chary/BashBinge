@@ -1,5 +1,11 @@
 #!/bin/bash
 
+trap "interrupt_handler" INT;
+
+interrupt_handler() {
+    echo "Command terminated abruptly!"
+    exit 3
+}
 if [[ "$#" -ne 3 ]] || ! [[ "$2" =~ ^[0-9]+$ ]] || ! [[ "$3" =~ ^[0-9]+$ ]]; then
     echo "Usage: $0 <operation> <num1> <num2>" 1>&2
     exit 1
